@@ -1,15 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import store from './../store'
 
 defineProps({
   msg: String,
 })
 
+const test = computed(() => store.state.test)
+
 const count = ref(0)
 </script>
 
 <template>
-  <h1 class="bg-red-500">{{ msg }}</h1>
+  <h1 class="bg-red-500">{{ msg }} {{ test }}</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
