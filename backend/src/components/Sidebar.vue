@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[200px] bg-indigo-700 text-gray-300 p-4 py-2">
+    <div class="w-[200px] transition-all bg-indigo-700 text-gray-300 p-4 py-2">
         <router-link class="flex items-center p-2 rounded transition-colors hover:bg-black/30 font-light"
             :to="{ name: 'app.dashboard' }">
             <span class="mr-2">
@@ -9,7 +9,7 @@
         </router-link>
 
         <router-link class="flex items-center p-2 rounded transition-colors hover:bg-black/30 font-light"
-            :to="{ name: 'app.dashboard' }">
+            :to="{ name: 'app.products' }">
             <span class="mr-2">
                 <ViewColumnsIcon class="w-4" />
             </span>
