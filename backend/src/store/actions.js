@@ -1,18 +1,26 @@
 import axiosClient from "./../axios";
 
-export function login({ commit }, data) {
-    return axiosClient.post("/login", data).then(({ data }) => {
-        commit("setUser", data.user);
-        commit("setToken", data.token);
+export async function login({ commit }, data) {
+    const response = await axiosClient.post("/login", data);
 
-        return data;
-    });
+    commit("setUser", response.data.user);
+    commit("setToken", response.data.token);
+
+    return response.data;
 }
 
-export function logout({ commit }) {
-    return axiosClient.post("/logout").then((response) => {
-        commit("setToken", null);
+export async function logout({ commit }) {
+    const response = await axiosClient.post("/logout");
 
-        return response;
-    });
+    commit("setToken", null);
+
+    return response;
+}
+
+export async function getUser({ commit }) {
+    const response = await axiosClient.get("/user");
+
+    commit("setUser", response.data);
+
+    return response;
 }
