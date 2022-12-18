@@ -47,7 +47,8 @@
                             :class="[
                                 active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
+                            ]"
+                            @click="logout">
                             <ArrowLeftOnRectangleIcon
                                 :active="active"
                                 class="mr-2 h-5 w-5 text-indigo-400"
@@ -66,6 +67,14 @@
 import { ArrowLeftOnRectangleIcon, Bars3Icon, UserIcon } from '@heroicons/vue/24/outline';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import store from './../store'
+import router from './../router'
 
 const emit = defineEmits(['toggle-sidebar'])
+
+async function logout() {
+    await store.dispatch('logout')
+
+    router.push({ name: 'login' })
+}
 </script>
