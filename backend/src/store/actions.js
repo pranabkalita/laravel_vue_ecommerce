@@ -1,5 +1,17 @@
 import axiosClient from "./../axios";
 
+export async function getProducts({ commit }) {
+    commit("setProducts", [true]);
+
+    try {
+        const response = await axiosClient.get("/products");
+
+        commit("setProducts", [false, response.data]);
+    } catch (error) {
+        commit("setProducts", [false]);
+    }
+}
+
 export async function login({ commit }, data) {
     const response = await axiosClient.post("/login", data);
 

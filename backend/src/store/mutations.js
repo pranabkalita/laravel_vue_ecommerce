@@ -1,3 +1,8 @@
+export function setProducts(state, [loading, response = {}]) {
+    state.products.loading = loading;
+    state.products.data = response.data;
+}
+
 export function setUser(state, user) {
     state.user.data = user;
 }

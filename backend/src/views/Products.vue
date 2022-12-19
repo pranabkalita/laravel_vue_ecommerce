@@ -24,7 +24,7 @@
                     placeholder="Type to Search products">
             </div>
         </div>
-        <Spinner v-if="false" />
+        <Spinner v-if="products.loading" />
         <template v-else>
             <table class="table-auto w-full">
                 <thead>
@@ -37,11 +37,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <td class="border-b-2 p-2">ID</td>
-                    <td class="border-b-2 p-2">Image</td>
-                    <td class="border-b-2 p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">Title</td>
-                    <td class="border-b-2 p-2">Price</td>
-                    <td class="border-b-2 p-2">Last Updated At</td>
+                    <tr class="animate-fade-in-down" v-for="(product, index) of products.data" :key="index">
+                        <td class="border-b-2 p-2">{{ product.id }}</td>
+                        <td class="border-b-2 p-2">
+                            <img class="w-16 h-16 object-cover" :src="product.image" :alt="product.title" />
+                        </td>
+                        <td class="border-b-2 p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
+                            {{ product.title }}
+                        </td>
+                        <td class="border-b-2 p-2">{{ product.price }}</td>
+                        <td class="border-b-2 p-2">{{ product.updated_at }}</td>
+                    </tr>
                 </tbody>
             </table>
         </template>
@@ -49,5 +55,21 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
 import Spinner from './../components/core/Spinner.vue'
+import store from '../store';
+import { PRODUCTS_PER_PAGE } from './../constants'
+
+const parPage = ref(PRODUCTS_PER_PAGE)
+const search = ref('')
+const products = computed(() => store.state.products)
+
+onMounted(() => {
+    getProducts()
+})
+
+function getProducts() {
+    store.dispatch('getProducts')
+}
+
 </script>
