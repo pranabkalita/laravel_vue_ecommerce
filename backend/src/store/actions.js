@@ -1,11 +1,19 @@
 import axiosClient from "./../axios";
 
-export async function getProducts({ commit }, { url = null }) {
+export async function getProducts(
+    { commit },
+    { url = null, search = "", perPage = 10 }
+) {
     commit("setProducts", [true]);
 
     try {
         url = url || "/products";
-        const response = await axiosClient.get(url);
+        const response = await axiosClient.get(url, {
+            params: {
+                search,
+                per_page: perPage,
+            },
+        });
 
         commit("setProducts", [false, response.data]);
     } catch (error) {
