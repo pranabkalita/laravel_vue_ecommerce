@@ -2,7 +2,7 @@ import axiosClient from "./../axios";
 
 export async function getProducts(
     { commit },
-    { url = null, search = "", perPage = 10 }
+    { url = null, search = "", perPage = 10, sortField, sortDirection }
 ) {
     commit("setProducts", [true]);
 
@@ -12,6 +12,8 @@ export async function getProducts(
             params: {
                 search,
                 per_page: perPage,
+                sort_field: sortField,
+                sort_direction: sortDirection,
             },
         });
 
