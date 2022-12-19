@@ -1,10 +1,11 @@
 import axiosClient from "./../axios";
 
-export async function getProducts({ commit }) {
+export async function getProducts({ commit }, { url = null }) {
     commit("setProducts", [true]);
 
     try {
-        const response = await axiosClient.get("/products");
+        url = url || "/products";
+        const response = await axiosClient.get(url);
 
         commit("setProducts", [false, response.data]);
     } catch (error) {
