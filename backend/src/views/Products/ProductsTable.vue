@@ -1,10 +1,4 @@
 <template>
-    <div class="flex items-center justify-between mb-3">
-        <h1 class="text-3xl font-semibold">Products</h1>
-        <button type="submit"
-            class="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">Add
-            new Product</button>
-    </div>
     <div class="bg-white p-4 rounded-lg shadow">
         <div class="flex justify-between border-b-2 pb-3">
             <div class="flex items-center">
@@ -31,7 +25,7 @@
                     <TableHeaderCell @click="sortProducts" field="id" :sort-field="sortField"
                         :sort-direction="sortDirection">ID
                     </TableHeaderCell>
-                    <TableHeaderCell @click="sortProducts" field="" :sort-field="sortField"
+                    <TableHeaderCell field="" :sort-field="sortField"
                         :sort-direction="sortDirection">Image
                     </TableHeaderCell>
                     <TableHeaderCell @click="sortProducts" field="title" :sort-field="sortField"
@@ -67,7 +61,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="flex justify-between items-center mt-5">
+        <div v-if="!products.loading" class="flex justify-between items-center mt-5">
             <span>
                 Showing from {{ products.from }} to {{ products.to }}
             </span>
@@ -95,10 +89,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import Spinner from './../components/core/Spinner.vue'
-import TableHeaderCell from '../components/core/Table/TableHeaderCell.vue';
-import store from '../store';
-import { PRODUCTS_PER_PAGE } from './../constants'
+import Spinner from '../../components/core/Spinner.vue'
+import TableHeaderCell from '../../components/core/Table/TableHeaderCell.vue';
+import store from '../../store';
+import { PRODUCTS_PER_PAGE } from '../../constants'
 
 const perPage = ref(PRODUCTS_PER_PAGE)
 const search = ref('')
