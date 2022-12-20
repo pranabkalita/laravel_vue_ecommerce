@@ -32,7 +32,7 @@ export async function createProduct({ commit }, product) {
 
 export async function getProducts(
     { commit },
-    { url = null, search = "", perPage = 10, sortField, sortDirection }
+    { url = null, search = "", perPage = 10, sortField, sortDirection } = {}
 ) {
     commit("setProducts", [true]);
 
@@ -76,4 +76,8 @@ export async function getUser({ commit }) {
     commit("setUser", response.data);
 
     return response;
+}
+
+export async function deleteProduct({ commit }, id) {
+    return axiosClient.delete(`/products/${id}`);
 }
